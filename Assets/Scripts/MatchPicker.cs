@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class MatchPicker : MonoBehaviour
 {
@@ -7,36 +8,67 @@ public class MatchPicker : MonoBehaviour
     [SerializeField] private ClickDetector clickDetector;
 
     private Shard[] matches = new Shard[2];
+    private bool checksMatches = false;
 
     private void MarkAsMatch(GameObject clickedObject)
     {
         if (inspector.isExamining) return;
 
         Shard clickedShard = clickedObject.GetComponent<Shard>();
-        if (clickedShard == null) return;
+        if (clickedShard == null || checksMatches) return;
 
-        if (matches[0] == null)
+        checksMatches = true;
+        if (matches[0] == null) // select first shard
         {
             matches[0] = clickedShard;
-            Debug.Log("First shard selected");
-            clickedShard.HighlightGolden();
+            clickedShard.AddGoldenOutline();
+            checksMatches = false;
         }
-        else if (matches[0] == clickedShard)
+        else if (matches[0] == clickedShard) // deselect first shard
         {
             matches[0] = null;
-            Debug.Log("First shard deselected");
-            clickedShard.UnhighlightGolden();
+            clickedShard.RemoveGoldenOutline();
+            checksMatches = false;
         }
-        else if (matches[0].GetAdjacentShards().Contains(clickedShard))
+        else if (matches[0].GetAdjacentShards().Contains(clickedShard)) // match with first shard
         {
-            matches[0].UnhighlightGolden();
-            clickedShard.UnhighlightGolden();
+            clickedShard.AddGoldenOutline();
+            matches[1] = clickedShard;
+            StartCoroutine(Matched());
+        }
+        else // no match
+        {
+            matches[0].RemoveGoldenOutline(); 
+            matches[0].AddRedOutline();
+            matches[1] = clickedShard;
+            matches[1].AddRedOutline();
+            StartCoroutine(NoMatch());
+        }
+    }
+    private IEnumerator Matched()
+    {
+        yield return new WaitForSeconds(1f);
+        matches[0].ShardMatched();
+        matches[1].ShardMatched();
+        matches[0].RemoveGoldenOutline();
+        matches[1].RemoveGoldenOutline();
+        ResetShards();
+        checksMatches = false;
+    }
+    private IEnumerator NoMatch()
+    {
+        yield return new WaitForSeconds(1f);
+        matches[0].RemoveRedOutline();
+        matches[1].RemoveRedOutline();
+        ResetShards();
+        checksMatches = false;
+    }
 
-            Debug.Log("Match found!");
-            matches[0].ShardMatched();
-            matches[0] = null;
-            clickedShard.ShardMatched();
-        }
+
+    private void ResetShards()
+    {
+        matches[0] = null;
+        matches[1] = null;
     }
 
     private void OnEnable()
