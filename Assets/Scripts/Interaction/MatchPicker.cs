@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MatchPicker : MonoBehaviour
 {
+    public UnityAction OnMatched;
 
     [SerializeField] private Inspector inspector;
     [SerializeField] private ClickDetector clickDetector;
@@ -54,6 +56,8 @@ public class MatchPicker : MonoBehaviour
         matches[1].RemoveGoldenOutline();
         ResetShards();
         checksMatches = false;
+        yield return new WaitForSeconds(3f);
+        OnMatched?.Invoke();
     }
     private IEnumerator NoMatch()
     {

@@ -12,7 +12,7 @@ public class Shard : MonoBehaviour
     private int goldenHighlightLayer = 9;
     private int redHighlightLayer = 10;
 
-    private bool isInEndPosition = false;
+    public bool IsMatched { get; private set; }
 
 
 #if UNITY_EDITOR
@@ -40,6 +40,7 @@ public class Shard : MonoBehaviour
     {
         moveUtils = new MoveUtils();
         gameObject.tag = "Interactable";
+        IsMatched = false;
         if (compositeShard == null)
         {
             Debug.LogError("Composite shard not set for " + name);
@@ -51,8 +52,8 @@ public class Shard : MonoBehaviour
 
     public void ShardMatched()
     {
-        if (isInEndPosition) return;
-        isInEndPosition = true;
+        if (IsMatched) return;
+        IsMatched = true;
         // Move to composite shard position
         StartCoroutine(moveUtils.MoveToPosition(transform, compositeShard.transform.position, compositeShard.transform.rotation, 5f, rotate: true));
     }

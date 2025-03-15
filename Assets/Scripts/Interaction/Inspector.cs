@@ -43,7 +43,6 @@ public class Inspector : MonoBehaviour
         originalRotation = clickedObject.transform.rotation;
 
         // Move object to examine position
-        clickedObject.transform.SetParent(null); // Detach from any parent
         StartCoroutine(moveUtils.MoveToPosition(clickedObject.transform, examinePosition.position, examinePosition.rotation, moveSpeed));
     }
 
