@@ -29,7 +29,9 @@ public class MatchPicker : MonoBehaviour
         }
         else if (matches[0].GetAdjacentShards().Contains(clickedShard))
         {
+            matches[0].UnhighlightGolden();
             clickedShard.UnhighlightGolden();
+
             Debug.Log("Match found!");
             matches[0].ShardMatched();
             matches[0] = null;
