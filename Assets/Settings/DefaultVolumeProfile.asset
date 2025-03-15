@@ -484,7 +484,7 @@ MonoBehaviour:
     m_Value: 5
   color1:
     m_OverrideState: 1
-    m_Value: {r: 0.3, g: 0.75, b: 1, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   color2:
     m_OverrideState: 1
     m_Value: {r: 0.3, g: 0.75, b: 1, a: 1}
