@@ -2,6 +2,7 @@
 
 public class MatchPicker : MonoBehaviour
 {
+
     [SerializeField] private Inspector inspector;
     [SerializeField] private ClickDetector clickDetector;
 
@@ -18,16 +19,17 @@ public class MatchPicker : MonoBehaviour
         {
             matches[0] = clickedShard;
             Debug.Log("First shard selected");
-            //TODO: Highlight the shard
+            clickedShard.HighlightGolden();
         }
         else if (matches[0] == clickedShard)
         {
             matches[0] = null;
             Debug.Log("First shard deselected");
-            //TODO: Unhighlight the shard
+            clickedShard.UnhighlightGolden();
         }
         else if (matches[0].GetAdjacentShards().Contains(clickedShard))
         {
+            clickedShard.UnhighlightGolden();
             Debug.Log("Match found!");
             matches[0].ShardMatched();
             matches[0] = null;

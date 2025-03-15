@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+//
 public class Shard : MonoBehaviour
 {
     [SerializeField] private List<Shard> adjacentShards;
-    [SerializeField] private GameObject compositeShard;
+    [SerializeField] private GameObject compositeShard; // look for same name in onValidate
     private MoveUtils moveUtils;
+    private Renderer shardRenderer;
+    private int goldenHighlightLayer = 9;
 
     private bool isInEndPosition = false;
 
@@ -21,6 +24,7 @@ public class Shard : MonoBehaviour
             return;
         }
         compositeShard.SetActive(false);
+        shardRenderer = GetComponent<Renderer>();
     }
 
     public void ShardMatched()
@@ -29,6 +33,19 @@ public class Shard : MonoBehaviour
         isInEndPosition = true;
         // Move to composite shard position
         StartCoroutine(moveUtils.MoveToPosition(transform, compositeShard.transform.position, compositeShard.transform.rotation, 5f, rotate: true));
+    }
+
+    public void HighlightGolden()
+    {
+        if ((shardRenderer.renderingLayerMask & (1 << goldenHighlightLayer)) == 0)
+        {
+            shardRenderer.renderingLayerMask |= (uint)(1 << goldenHighlightLayer);
+        }
+    }
+
+    public void UnhighlightGolden()
+    {
+        shardRenderer.renderingLayerMask = 1 << 0;
     }
 
 }

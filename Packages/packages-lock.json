@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.cqf.urpoutline": {
+      "version": "https://github.com/CristianQiu/Unity-URP-Outline.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "e4368bf393c142d761c286d242abe94aac83668a"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.6",
       "depth": 0,
