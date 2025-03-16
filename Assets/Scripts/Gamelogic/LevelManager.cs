@@ -1,8 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField] private PlayerInputReader playerInput;
     [SerializeField] private List<Level> levels;
     private int currentLevelIndex = 0;
 
@@ -15,7 +18,19 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void NextLevel()
+    private void LevelCompleted()
+    {
+        StartCoroutine(LevelEndSequenze());
+    }
+
+    private IEnumerator LevelEndSequenze()
+    {
+        playerInput.DisablePlayerActions();
+        yield return new WaitForSeconds(3f);
+        LoadNextLevel();
+        playerInput.EnablePlayerActions();
+    }
+    private void LoadNextLevel()
     {
         levels[currentLevelIndex].gameObject.SetActive(false);
         currentLevelIndex++;
@@ -33,7 +48,7 @@ public class LevelManager : MonoBehaviour
     {
         foreach (Level level in levels)
         {
-            level.OnLevelCompleted += NextLevel;
+            level.OnLevelCompleted += LevelCompleted;
         }
     }
 
@@ -41,7 +56,7 @@ public class LevelManager : MonoBehaviour
     {
         foreach (Level level in levels)
         {
-            level.OnLevelCompleted -= NextLevel;
+            level.OnLevelCompleted -= LevelCompleted;
         }
     }
 }

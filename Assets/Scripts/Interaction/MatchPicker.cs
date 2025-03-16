@@ -56,7 +56,6 @@ public class MatchPicker : MonoBehaviour
         matches[1].RemoveGoldenOutline();
         ResetShards();
         checksMatches = false;
-        yield return new WaitForSeconds(3f);
         OnMatched?.Invoke();
     }
     private IEnumerator NoMatch()

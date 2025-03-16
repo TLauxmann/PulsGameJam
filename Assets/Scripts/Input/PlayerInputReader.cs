@@ -32,6 +32,8 @@ public class PlayerInputReader : ScriptableObject, IPlayerActions
         inputActions.Player.Disable();
     }
 
+    public void EnablePlayerActions() => inputActions.Player.Enable();
+    public void DisablePlayerActions() => inputActions.Player.Disable();
 
     public void OnLeave(InputAction.CallbackContext context)
     {
