@@ -6477,6 +6477,53 @@ MonoBehaviour:
   _settingsButton: {fileID: 1868323724}
   _mainMenuButton: {fileID: 334620134}
   _quitButton: {fileID: 2135789382}
+--- !u!1 &1916969159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1916969161}
+  - component: {fileID: 1916969160}
+  m_Layer: 0
+  m_Name: Cursor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1916969160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916969159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31491bf471664e408169db5bbf1f231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorArrow: {fileID: 2800000, guid: e73bf0764983ee54d9e8dad23c0f5e45, type: 3}
+  cursorArrowUpdate: {fileID: 2800000, guid: 14a5daa383da9df4a9fe1947d78a295f, type: 3}
+  _clickClip: {fileID: 0}
+--- !u!4 &1916969161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916969159}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 337.10693, y: 174.0855, z: 0.3255167}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1919357120
 GameObject:
   m_ObjectHideFlags: 0
@@ -8027,3 +8074,4 @@ SceneRoots:
   - {fileID: 1943239523}
   - {fileID: 1638977452}
   - {fileID: 201586281}
+  - {fileID: 1916969161}
