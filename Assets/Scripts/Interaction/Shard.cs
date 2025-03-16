@@ -6,6 +6,8 @@ public class Shard : MonoBehaviour
 {
     [SerializeField] private List<Shard> adjacentShards;
     [SerializeField] private GameObject compositeShard; // look for same name in onValidate
+    [SerializeField] private bool lookForAdjacentShards = false;
+    [SerializeField] private float adjacentShardRadius = 1.5f;
     private MoveUtils moveUtils;
     private Renderer shardRenderer;
     private int hoverHighlightLayer = 8;
@@ -29,6 +31,18 @@ public class Shard : MonoBehaviour
                     compositeShard = go;
                     break;
                 }
+            }
+        }
+
+        if (adjacentShards.Contains(this))
+        {
+            adjacentShards.Remove(this);
+        }
+        foreach (Shard shard in adjacentShards)
+        {
+            if(!shard.adjacentShards.Contains(this))
+            {
+                shard.adjacentShards.Add(this);
             }
         }
     }

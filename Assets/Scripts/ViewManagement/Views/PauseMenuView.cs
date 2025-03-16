@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenuView : View
@@ -9,6 +10,7 @@ public class PauseMenuView : View
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Button _quitButton;
+    [SerializeField] private Camera _camera;
 
     public override void Initialize()
     {
@@ -20,6 +22,8 @@ public class PauseMenuView : View
         _mainMenuButton.onClick.AddListener(() =>
         {
             //TODO: Unload your game scene
+            SceneManager.UnloadSceneAsync(1);
+            _camera.gameObject.SetActive(true);
 
             Time.timeScale = 1;
             ViewManager.Show<MainMenuView>();
