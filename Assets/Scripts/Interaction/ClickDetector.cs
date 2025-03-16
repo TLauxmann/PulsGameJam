@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
@@ -9,9 +8,8 @@ public class ClickDetector : MonoBehaviour
     public UnityAction<GameObject> OnMatchItem;
     public UnityAction<GameObject> OnHover;
 
-    public bool hovers;
-
     [SerializeField] private PlayerInputReader playerInput;
+
     private Ray ray;
     private RaycastHit hit;
 
@@ -34,11 +32,6 @@ public class ClickDetector : MonoBehaviour
             {
                 //Debug.Log("Hit interactable");
                 interactAction?.Invoke(hit.collider.gameObject);
-                hovers = true;
-            }
-            else
-            {
-                hovers = false;
             }
         }
     }

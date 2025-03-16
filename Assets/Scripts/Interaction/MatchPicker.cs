@@ -8,6 +8,7 @@ public class MatchPicker : MonoBehaviour
 
     [SerializeField] private Inspector inspector;
     [SerializeField] private ClickDetector clickDetector;
+    [SerializeField] private ShardSound shardSound;
 
     private Shard[] matches = new Shard[2];
     private bool checksMatches = false;
@@ -20,6 +21,8 @@ public class MatchPicker : MonoBehaviour
         if (clickedShard == null || checksMatches) return;
 
         checksMatches = true;
+        shardSound.PlayClickSound();
+
         if (matches[0] == null) // select first shard
         {
             matches[0] = clickedShard;
@@ -46,6 +49,7 @@ public class MatchPicker : MonoBehaviour
             matches[1].AddRedOutline();
             StartCoroutine(NoMatch());
         }
+
     }
     private IEnumerator Matched()
     {
@@ -57,6 +61,7 @@ public class MatchPicker : MonoBehaviour
         ResetShards();
         checksMatches = false;
         OnMatched?.Invoke();
+        shardSound.PlayClickSound(0.2f);
     }
     private IEnumerator NoMatch()
     {

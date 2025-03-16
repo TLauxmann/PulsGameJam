@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private PlayerInputReader playerInput;
     [SerializeField] private List<Level> levels;
+    [SerializeField] private AudioSource audioSource;
     private int currentLevelIndex = 0;
 
     private void Awake()
@@ -16,6 +17,16 @@ public class LevelManager : MonoBehaviour
         {
             levels[i].gameObject.SetActive(false);
         }
+    }
+
+    private void Start()
+    {
+        LevelStarts();
+    }
+
+    private void LevelStarts()
+    {
+        audioSource.Play();
     }
 
     private void LevelCompleted()
@@ -37,6 +48,7 @@ public class LevelManager : MonoBehaviour
         if (currentLevelIndex < levels.Count)
         {
             levels[currentLevelIndex].gameObject.SetActive(true);
+            LevelStarts();
         }
         else
         {

@@ -38,7 +38,13 @@ public class HoverDetector : MonoBehaviour
             else
             {
                 shard?.RemoveHoverOutline();
+                lastShard?.RemoveHoverOutline();
             }
+        }
+        else
+        {
+            shard?.RemoveHoverOutline();
+            lastShard?.RemoveHoverOutline();
         }
     }
 }
